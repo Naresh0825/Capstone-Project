@@ -42,7 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'authentication',
+    'library',
     'drf_yasg',
     'rest_framework_simplejwt',
     
@@ -89,8 +89,11 @@ WSGI_APPLICATION = 'Capstone_Project_JWT.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'capstoneDB',
+        'USER':'naresh',
+        'PASSWORD':'admin',
+        'HOST':'localhost'
     }
 }
 
@@ -135,3 +138,28 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+
+# For Logging all the sql query 
+# settings.py
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'console': {
+            'class': 'logging.StreamHandler',
+        },
+    },
+    'loggers': {
+        'django.db.backends': {
+            'level': 'DEBUG',
+            'handlers': ['console'],
+            'propagate': False, # Set to False to prevent duplicate logging
+        },
+    },
+    'root': {
+        'handlers': ['console'],
+        'level': 'WARNING', # Adjust root level as needed
+    },
+}
